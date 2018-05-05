@@ -1,0 +1,29 @@
+public node merge_sort (node list1) {
+	if (list1 == null || list1.next == null)
+           return list1; // checks for empty or single list
+	node list2 = split (list1);
+	list1 = merge_sort (list1);
+	list2 = merge_sort (list2);
+	return merge (list1, list2);
+} // end merge_sort
+
+public node split (node list1) {
+	if (list1 == null || list1.next == null) return null;
+	node list2 = list1.next;
+	list1.next = list2.next;
+	list2.next = split (list2.next);
+	return list2;
+} // end split method
+
+public node merge (node list1, node list2) {
+	if (list1 == null) return list2;
+	if (list2 == null) return list1;
+	if (list1.student.id < list2.student.id) {
+		list1.next = merge (list1.next, list2);
+		return list1;
+	} // end if
+	else {
+		list2.next = merge (list1, list2.next);
+		return list2;
+	} // end else
+} // end merge method
